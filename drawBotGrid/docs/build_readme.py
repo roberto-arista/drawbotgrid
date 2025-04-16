@@ -14,9 +14,8 @@ insert_regex = re.compile("<insert-file: (.+)>")
 
 # ----------------------------------------
 
-def snippet_partial_include(snippet, 
-                                   include_open_tag="# <include>", 
-                                   include_close_tag="# </include>"):
+
+def snippet_partial_include(snippet, include_open_tag="# <include>", include_close_tag="# </include>"):
     include_tag_is_open = False
     out_lines = []
     for line in snippet.splitlines():
@@ -30,6 +29,7 @@ def snippet_partial_include(snippet,
         return "\n".join(out_lines)
     else:
         return snippet
+
 
 # ----------------------------------------
 
