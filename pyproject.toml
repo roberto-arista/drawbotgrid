@@ -21,8 +21,14 @@ classifiers = [
 [tool.uv.sources]
 drawbot = { git = "https://github.com/typemytype/drawbot" }
 
-[tool.uv]
-package = true
+[dependency-groups]
+dev = [
+    "coverage>=7.8.0",
+    "pyright>=1.1.399",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.5",
+]
 
 [tool.ruff]
 line-length = 120
@@ -31,15 +37,16 @@ indent-width = 4
 [tool.ruff.format]
 line-ending = "auto"
 
+[tool.coverage.run]
+source = ["drawBotGrid"]
+
+[tool.uv]
+package = true
+
 [tool.hatch.build.targets.wheel]
-packages = ["dinamo"]
+packages = ["drawBotGrid"]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[dependency-groups]
-dev = [
-    "pyright>=1.1.399",
-    "ruff>=0.11.5",
-]
