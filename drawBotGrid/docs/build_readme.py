@@ -5,14 +5,11 @@ import re
 This is a hacky attempt to build a readme with code snippets inserted directly from the relevant py files.
 """
 
-# ----------------------------------------
 
 root_path = pathlib.Path(__file__).parent
 readme_prebuild_path = root_path / "readme-prebuild.md"
 readme_out_path = root_path / "../../README.md"
 insert_regex = re.compile("<insert-file: (.+)>")
-
-# ----------------------------------------
 
 
 def snippet_partial_include(snippet, include_open_tag="# <include>", include_close_tag="# </include>"):
@@ -30,8 +27,6 @@ def snippet_partial_include(snippet, include_open_tag="# <include>", include_clo
     else:
         return snippet
 
-
-# ----------------------------------------
 
 print(f"Building {readme_out_path.name}")
 readme_compiled = ""
