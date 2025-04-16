@@ -3,10 +3,10 @@ DrawBotGrid - A grid system for DrawBot
 
 """
 
-from .grid import BaselineGrid, ColumnGrid, Grid, RowGrid
-from .image import image_at_size, image_box, imageAtSize, imageBox
-from .table import Table
-from .text import (
+from drawBotGrid.grid import BaselineGrid, ColumnGrid, Grid, RowGrid
+from drawBotGrid.image import image_at_size, image_box, imageAtSize, imageBox
+from drawBotGrid.table import Table
+from drawBotGrid.text import (
     baselineGridTextBox,
     baselineHeight,
     columnBaselineGridTextBox,
