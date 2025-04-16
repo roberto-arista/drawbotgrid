@@ -99,10 +99,10 @@ class AbstractArea:
                 db.fontSize(5)
                 self.draw_indexes()
 
-    def draw_frame(self) -> None:
+    def draw_frame(self) -> None:  # pragma: no cover
         raise NotImplementedError
 
-    def draw_indexes(self) -> None:
+    def draw_indexes(self) -> None:  # pragma: no cover
         raise NotImplementedError
 
 
@@ -118,11 +118,11 @@ class AbstractGutterGrid(AbstractArea):
         self.gutter = gutter
 
     @property
-    def _start_point(self) -> float:
+    def _start_point(self) -> float:  # pragma: no cover
         raise NotImplementedError
 
     @property
-    def _end_point(self) -> float:
+    def _end_point(self) -> float:  # pragma: no cover
         raise NotImplementedError
 
     @property
