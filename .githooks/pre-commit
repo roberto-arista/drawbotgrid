@@ -1,0 +1,8 @@
+#!/bin/zsh
+uv sync --all-extras
+source .venv/bin/activate
+ruff format -- drawBotGrid tests
+for x in drawBotGrid/docs/snippet_*.py; do
+    uv run python "$x"
+done
+build_readme
