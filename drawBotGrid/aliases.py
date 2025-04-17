@@ -12,7 +12,7 @@ VerticalAlign = Literal["top", "bottom", "center"]
 
 # Image types
 ImageFitting = Literal["fit", "fill", "crop"]
-ImageAnchor = tuple[str, str]  # (horizontal, vertical)
+ImageAnchor = tuple[HorizontalAlign, VerticalAlign]  # (horizontal, vertical)
 
 # Table types
 ColumnDescription: TypeAlias = dict[str, str | float | None]

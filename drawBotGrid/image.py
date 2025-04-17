@@ -5,14 +5,15 @@ import drawBot as db
 from drawBot.aliases import SomePath
 from PIL import Image
 
-from drawBotGrid.aliases import Box
+from drawBotGrid.aliases import Box, ImageAnchor, ImageFitting
 
 
-def image_at_size(path, box: Box, preserve_proportions=True):
+def image_at_size(path: SomePath, box: Box, preserve_proportions: bool = True):
     """
     this could do a lot more.
     Things like cropping the image,
-    aligning it somewhere esle that bottom, left...
+    aligning it somewhere else that bottom, left...
+
     """
     x, y, w, h = box
     actual_w, actual_h = db.imageSize(path)
@@ -40,7 +41,15 @@ def image_at_size(path, box: Box, preserve_proportions=True):
 imageAtSize = image_at_size
 
 
-def image_box(path, box: Box, fitting="fit", scale: float = 1, anchor=("left", "top"), draw_box_frame=False, **kwargs):
+def image_box(
+    path: SomePath,
+    box: Box,
+    fitting: ImageFitting = "fit",
+    scale: float = 1,
+    anchor: ImageAnchor = ("left", "top"),
+    draw_box_frame: bool = False,
+    **kwargs,
+):
     assert fitting in ("fit", "fill", "crop")
 
     im_path = Path(path)
@@ -122,7 +131,6 @@ def _crop_image_with_anchor(input_path: SomePath, output_path: SomePath, anchor,
     ## moving through PIL here
     ## as drawBot imageObject.crop
     ## seems to produce blurred borders
-
     crop_x = min(crop_x, im_width)
     crop_y = min(crop_y, im_height)
     im = Image.open(input_path)
@@ -130,26 +138,5 @@ def _crop_image_with_anchor(input_path: SomePath, output_path: SomePath, anchor,
     im.save(output_path)
     return crop_width, crop_height
 
-
-# def _get_image_offset_in_box(im, box, anchor):
-#     x, y, w, h = box
-#     anchor_x, anchor_y = anchor
-#     im_width, im_height = db.imageSize(im)
-#     if anchor_x == "left":
-#         offset_x = x
-#     elif anchor_x == "right":
-#         offset_x = x + w - im_width
-#     elif anchor_x == "center":
-#         offset_x = x + (w - im_width)/2
-
-#     assert anchor_y in ("center", "bottom", "top")
-#     if anchor_y == "bottom":
-#         offset_y = y
-#     elif anchor_y == "top":
-#         offset_y = y + h - im_height
-#     elif anchor_y == "center":
-#         offset_y = y + (h - im_height)/2
-
-#     return (offset_x, offset_y)
 
 imageBox = image_box
