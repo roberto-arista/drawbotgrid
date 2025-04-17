@@ -8,18 +8,25 @@ from drawBotGrid import ColumnGrid, Grid, imageBox
 newPage("A4Landscape")
 
 global_grid = ColumnGrid.from_margins((-60, -40, -60, -40), subdivisions=2, gutter=40)
+
 grid_left = Grid(
-    (global_grid[0], global_grid.bottom, global_grid * 1, global_grid.height), column_subdivisions=3, row_subdivisions=3
+    (global_grid[0], global_grid.bottom, global_grid * 1, global_grid.height),
+    column_subdivisions=3,
+    row_subdivisions=3,
 )
 grid_right = Grid(
-    (global_grid[1], global_grid.bottom, global_grid * 1, global_grid.height), column_subdivisions=3, row_subdivisions=3
+    (global_grid[1], global_grid.bottom, global_grid * 1, global_grid.height),
+    column_subdivisions=3,
+    row_subdivisions=3,
 )
 
 img_path = "drawBotGrid/docs/drawMech-small.jpg"
 
+cell_width = grid_left.column_width
+cell_height = grid_left.row_height
 imageBox(
     img_path,
-    (grid_left.columns[0], grid_left.rows[0], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[0], grid_left.rows[0], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("left", "bottom"),
@@ -27,7 +34,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_left.columns[0], grid_left.rows[1], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[0], grid_left.rows[1], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("left", "center"),
@@ -35,7 +42,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_left.columns[0], grid_left.rows[2], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[0], grid_left.rows[2], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("left", "top"),
@@ -44,7 +51,7 @@ imageBox(
 
 imageBox(
     img_path,
-    (grid_left.columns[1], grid_left.rows[0], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[1], grid_left.rows[0], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("center", "bottom"),
@@ -52,7 +59,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_left.columns[1], grid_left.rows[1], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[1], grid_left.rows[1], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("center", "center"),
@@ -60,7 +67,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_left.columns[1], grid_left.rows[2], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[1], grid_left.rows[2], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("center", "top"),
@@ -69,7 +76,7 @@ imageBox(
 
 imageBox(
     img_path,
-    (grid_left.columns[2], grid_left.rows[0], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[2], grid_left.rows[0], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("right", "bottom"),
@@ -77,7 +84,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_left.columns[2], grid_left.rows[1], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[2], grid_left.rows[1], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("right", "center"),
@@ -85,16 +92,18 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_left.columns[2], grid_left.rows[2], grid_left.columns * 1, grid_left.rows * 1),
+    (grid_left.columns[2], grid_left.rows[2], cell_width, cell_height),
     fitting="crop",
     scale=0.15,
     anchor=("right", "top"),
     draw_box_frame=True,
 )
 
+cell_width = grid_right.columns * 1
+cell_height = grid_right.rows * 1
 imageBox(
     img_path,
-    (grid_right.columns[0], grid_right.rows[0], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[0], grid_right.rows[0], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("left", "bottom"),
@@ -102,7 +111,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_right.columns[0], grid_right.rows[1], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[0], grid_right.rows[1], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("left", "center"),
@@ -110,7 +119,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_right.columns[0], grid_right.rows[2], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[0], grid_right.rows[2], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("left", "top"),
@@ -119,7 +128,7 @@ imageBox(
 
 imageBox(
     img_path,
-    (grid_right.columns[1], grid_right.rows[0], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[1], grid_right.rows[0], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("center", "bottom"),
@@ -127,7 +136,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_right.columns[1], grid_right.rows[1], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[1], grid_right.rows[1], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("center", "center"),
@@ -135,7 +144,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_right.columns[1], grid_right.rows[2], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[1], grid_right.rows[2], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("center", "top"),
@@ -144,7 +153,7 @@ imageBox(
 
 imageBox(
     img_path,
-    (grid_right.columns[2], grid_right.rows[0], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[2], grid_right.rows[0], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("right", "bottom"),
@@ -152,7 +161,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_right.columns[2], grid_right.rows[1], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[2], grid_right.rows[1], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("right", "center"),
@@ -160,7 +169,7 @@ imageBox(
 )
 imageBox(
     img_path,
-    (grid_right.columns[2], grid_right.rows[2], grid_right.columns * 1, grid_right.rows * 1),
+    (grid_right.columns[2], grid_right.rows[2], cell_width, cell_height),
     fitting="crop",
     scale=1,
     anchor=("right", "top"),
