@@ -17,7 +17,7 @@ For drawBot as a command line module, just enter the following terminal command:
 
 ## ColumnGrid
 
-![ColumnGrid intro](drawBotGrid/docs/snippet-00-ColumnGrid-intro.png)
+![ColumnGrid intro](drawBotGrid/docs/snippet_00_ColumnGrid_intro.png)
 
 `ColumnGrid((x, y, h, w), subdivisions=8, gutter=10)` divides the page in a given number of columns, separated by a gutter, making it easy to retrieve absolute x coordinates within the page.
 
@@ -25,19 +25,19 @@ For drawBot as a command line module, just enter the following terminal command:
 Negative indexes works, `ColumnGrid[-1]` will return the x coordinate of *right* of the last column.
 
 ```python
-<insert-file: snippet-10-ColumnGrid-basics.py>
+<insert-file: snippet_10_ColumnGrid_basics.py>
 ```
 
-![ColumnGrid basic](drawBotGrid/docs/snippet-10-ColumnGrid-basics.png)
+![ColumnGrid basic](drawBotGrid/docs/snippet_10_ColumnGrid_basics.png)
 
 
 `ColumnGrid` is also multipliable. `ColumnGrid * 3` will return the width of 3 columns, including the 2 separating gutters. `ColumnGrid * 1` will return the width of a single column, with no gutter. Negative mutlipliers work as well. 
 
 ```python
-<insert-file: snippet-20-ColumnGrid-multiply.py>
+<insert-file: snippet_20_ColumnGrid_multiply.py>
 ```
 
-![ColumnGrid multiply](drawBotGrid/docs/snippet-20-ColumnGrid-multiply.png)
+![ColumnGrid multiply](drawBotGrid/docs/snippet_20_ColumnGrid_multiply.png)
 
 
 Conviniently, instead of creating a `ColumnGrid` from its `(x, y, w, h)` coordinates, you can initiate it from its margin values relative to the document with `ColumnGrid.from_margint((left_margin, bottom_margin, right_margin, top_margin), subdivisions, gutter)`. Margins are expressed with negative values (following [Vanilla conventions](https://github.com/robotools/vanilla)).
@@ -46,10 +46,10 @@ Handy coordinates can be easyly accessed with `ColumnGrid.bottom`, `ColumnGrid.t
 
 
 ```python
-<insert-file: snippet-30-ColumnGrid-margins.py>
+<insert-file: snippet_30_ColumnGrid_margins.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-30-ColumnGrid-margins.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_30_ColumnGrid_margins.png)
 
 
 
@@ -60,10 +60,10 @@ Handy coordinates can be easyly accessed with `ColumnGrid.bottom`, `ColumnGrid.t
 
 
 ```python
-<insert-file: snippet-40-RowGrid-basics.py>
+<insert-file: snippet_40_RowGrid_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-40-RowGrid-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_40_RowGrid_basics.png)
 
 
 
@@ -75,10 +75,10 @@ Handy coordinates can be easyly accessed with `ColumnGrid.bottom`, `ColumnGrid.t
 The underlying `ColumnGrid` and `RowGrid` can be accesed through `Grid.columns` and `Grid.rows`, repectiveley. 
 
 ```python
-<insert-file: snippet-50-Grid-basics.py>
+<insert-file: snippet_50_Grid_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-50-Grid-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_50_Grid_basics.png)
 
 
 If you're feeling adventurous, `Grid.column` and `Grid.row` can be called directly by a tuple of indexes. `Grid[(1, 5)]` will return the coordinate of the column at index 1 and the row at index 5.
@@ -86,18 +86,18 @@ If you're feeling adventurous, `Grid.column` and `Grid.row` can be called direct
 `Grid` can also be multiplied by a tupple. `Grid*(2, 4)` will return the width value of 2 column and the height value of 4 rows (including the required gutters).
 
 ```python
-<insert-file: snippet-60-Grid-advanced.py>
+<insert-file: snippet_60_Grid_advanced.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-60-Grid-advanced.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_60_Grid_advanced.png)
 
 If you made it this far, you likely like grids, so we placed some grids inside your grid.
 
 ```python
-<insert-file: snippet-70-Grid-inception.py>
+<insert-file: snippet_70_Grid_inception.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-70-Grid-inception.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_70_Grid_inception.png)
 
 
 
@@ -111,10 +111,10 @@ Unlike `RowGrid`, `BaselineGrid` has no gutter and a fixed subdivison width.
 Another notable difference is that folowing the top down direction of Latin text paragraphs, the first line,`BaselineGrid[0]` is a the top of the grid, rather than its bottom. 
 
 ```python
-<insert-file: snippet-80-BaselineGrid-basics.py>
+<insert-file: snippet_80_BaselineGrid_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-80-BaselineGrid-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_80_BaselineGrid_basics.png)
 
 
 
@@ -124,18 +124,18 @@ Another notable difference is that folowing the top down direction of Latin text
 `BaselineGrid`only becomes usefull if you can snap text to it. `baselineGridTextBox(text, (x, y, w, h), baselineGrid, align_first_line_only=False, align="left")` is a `textBox` that takes a `BaselineGrid` object as an additonal argument. It will adjust the text `lineHeight` in order ot make it snap to the baseline grid.
 
 ```python
-<insert-file: snippet-100-BaselineGridTextBox-basics.py>
+<insert-file: snippet_100_BaselineGridTextBox_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-100-BaselineGridTextBox-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_100_BaselineGridTextBox_basics.png)
 
 `BaselineGridTextBox` will try to snap your defined `lineHeight` to the next multiple of its `BaselineGrid.line_height`. That mean you can use the same `BaselineGrid` for multiple size of text if you want to.
 
 ```python
-<insert-file: snippet-110-BaselineGridTextBox-lineHeight.py>
+<insert-file: snippet_110_BaselineGridTextBox_lineHeight.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-110-BaselineGridTextBox-lineHeight.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_110_BaselineGridTextBox_lineHeight.png)
 
 
 
@@ -147,10 +147,10 @@ Another notable difference is that folowing the top down direction of Latin text
 Setting the optional argument `draw_grid=True` will draw the underlying grid.
 
 ```python
-<insert-file: snippet-120-ColumnTextBox-basics.py>
+<insert-file: snippet_120_ColumnTextBox_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-120-ColumnTextBox-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_120_ColumnTextBox_basics.png)
 
 
 
@@ -160,20 +160,20 @@ Setting the optional argument `draw_grid=True` will draw the underlying grid.
 
 
 ```python
-<insert-file: snippet-130-ColumnBaselineGridTextBox-basics.py>
+<insert-file: snippet_130_ColumnBaselineGridTextBox_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-130-ColumnBaselineGridTextBox-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_130_ColumnBaselineGridTextBox_basics.png)
 
 
 # verticalAlignTextBox
 `verticalAlignTextBox(text, (x, y, w, h), vertical_align="top", align="left")` is a `textBox` that takes `vertical_align` as an additonal argument. Possible values are `"top"`, `"center"` and `"bottom"`.
 
 ```python
-<insert-file: snippet-140-verticalAlignTextBox-basics.py>
+<insert-file: snippet_140_verticalAlignTextBox_basics.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-140-verticalAlignTextBox-basics.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_140_verticalAlignTextBox_basics.png)
 
 # textOverflowTestMode
 
@@ -181,10 +181,10 @@ Sometimes, you need to know if a textBox like object is overflowing before drawi
 `textOverflowTestMode(True)` will trigger a special mode where all drawBotGrid textBox related object will return overflow but not be drawn on the page. `textOverflowTestMode(False)` will reverse back to default, where textBox related objects are drawn as usual.
 
 ```python
-<insert-file: snippet-148-textOverflowTestMode.py>
+<insert-file: snippet_148_textOverflowTestMode.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-148-textOverflowTestMode.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_148_textOverflowTestMode.png)
 
 *Note: This departs quite a bit from the DrawBot way handling text overflow testing and is subject to change :)*
 
@@ -198,53 +198,56 @@ By default, it takes an image or imageObject and scale it so that it fits within
 - `fitting="crop"` will show the image at full size, and crop it so that it tays within the box.
 
 ```python
-<insert-file: snippet-150-imageBox-fitting.py>
+<insert-file: snippet_150_imageBox_fitting.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-150-imageBox-fitting.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_150_imageBox_fitting.png)
 
 ### fitting=fit
 
 ```python
-<insert-file: snippet-160-imageBox-fit.py>
+<insert-file: snippet_160_imageBox_fit.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-160-imageBox-fit.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_160_imageBox_fit.png)
 
 ### fitting=fill
 
 ```python
-<insert-file: snippet-170-imageBox-fill.py>
+<insert-file: snippet_170_imageBox_fill.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-170-imageBox-fill.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_170_imageBox_fill.png)
 
 ### fitting=crop
 
 ```python
-<insert-file: snippet-180-imageBox-crop.py>
+<insert-file: snippet_180_imageBox_crop.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-180-imageBox-crop.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_180_imageBox_crop.png)
 
 ### anchors
 
 By default, when cropped or smaller than the box, the image is anchored to the top left of a the imageBox. An `anchor=("left", "top")` argument can be provided to adjust the origin of the image within the box. `anchor` must be a tupple describing the horizontal and vertical positioning. Possible values for horizontal positioning are `"left"`, `"center"` or `"right"`, possible values for vertical positioning are `"top"`, `"center"` or `"bottom"`.
 
 ```python
-<insert-file: snippet-190-imageBox-anchors.py>
+<insert-file: snippet_190_imageBox_anchors.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-190-imageBox-anchors.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_190_imageBox_anchors.png)
 
 Additionally, when using `fitting="crop"`, a `scale` argument can be provided to control the size at which the image will be displayed inside the `ìmageBox`.
 
 When using `fitting="fill"` or `fitting="fit"`, the scale argument will be ignored, as the scale is automatically calculated against the box size.
 
 ```python
-<insert-file: snippet-200-imageBox-scale.py>
+<insert-file: snippet_200_imageBox_scale.py>
 ```
 
-![ColumnGrid margins](drawBotGrid/docs/snippet-200-imageBox-scale.png)
+![ColumnGrid margins](drawBotGrid/docs/snippet_200_imageBox_scale.png)
 
 
+# Development
+
+- There is a pre-commit hook we suggest to use, in order to do that, you have to set the hook folder with `git config core.hooksPath .githooks` and then flag the `pre-commit` script as executable with `chmod 755 .githooks/pre-commit`. To check that everything is in order you can run `git hook run pre-commit`. The hook takes care of formatting the codebase and re-run all the documentation snippets.
