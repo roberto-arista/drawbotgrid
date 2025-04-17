@@ -2,7 +2,8 @@
 from typing import Literal, TypeAlias
 
 # Basic geometric types
-Box = Margins = tuple[float, float, float, float]
+Box: TypeAlias = tuple[float, float, float, float]
+Margins: TypeAlias = tuple[float, float, float, float]
 Point: TypeAlias = tuple[float, float]  # x, y coordinates
 
 # Text alignment types

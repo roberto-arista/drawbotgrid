@@ -176,7 +176,7 @@ class AbstractGutterGrid(AbstractArea):
     def __iter__(self) -> Iterator[float]:
         for i in range(self.subdivisions):
             value = self.__getitem__(i)
-            assert isinstance(value, float)
+            assert isinstance(value, float | int)
             yield value
 
     def __mul__(self, factor: float) -> float:
@@ -204,6 +204,14 @@ class ColumnGrid(AbstractGutterGrid):
     @property
     def _end_point(self) -> float:
         return self.right
+
+    def draw_frame(self):
+        for column in self:
+            db.rect(column, self.bottom, self.column_width, self.height)
+
+    def draw_indexes(self):
+        for i, column in enumerate(self):
+            db.text(str(i), (column + 2, self.bottom + 2))
 
 
 class RowGrid(AbstractGutterGrid):
@@ -245,39 +253,39 @@ class Grid(AbstractGutterGrid):
         column_gutter: float = 10,
         row_gutter: float = 10,
     ) -> None:
-        self.column_grid = ColumnGrid(possize, column_subdivisions, column_gutter)
-        self.row_grid = RowGrid(possize, row_subdivisions, row_gutter)
+        self.columns = ColumnGrid(possize, column_subdivisions, column_gutter)
+        self.rows = RowGrid(possize, row_subdivisions, row_gutter)
         super().__init__(possize)
 
     @property
-    def _reference_dimension(self) -> float:
+    def _reference_dimension(self) -> float:  # pragma: no cover
         return 0.0  # Not used in this implementation
 
     @property
-    def _start_point(self) -> float:
+    def _start_point(self) -> float:  # pragma: no cover
         return 0.0  # Not used in this implementation
 
     @property
-    def _end_point(self) -> float:
+    def _end_point(self) -> float:  # pragma: no cover
         return 0.0  # Not used in this implementation
 
     @property
     def column_width(self) -> float:
-        return self.column_grid.column_width
+        return self.columns.column_width
 
     @property
     def row_height(self) -> float:
-        return self.row_grid.row_height
+        return self.rows.row_height
 
     @property
-    def subdivision_dimension(self) -> float:
+    def subdivision_dimension(self) -> float:  # pragma: no cover
         return 0.0  # Not used in this implementation
 
     def column_span(self, span: float) -> float:
-        return self.column_grid.span(span)
+        return self.columns.span(span)
 
     def row_span(self, span: float) -> float:
-        return self.row_grid.span(span)
+        return self.rows.span(span)
 
     def span(self, column_span_row_span: tuple[float, float]) -> tuple[float, float]:
         column_span, row_span = column_span_row_span
@@ -286,26 +294,26 @@ class Grid(AbstractGutterGrid):
     def __getitem__(self, index: tuple[int, int]) -> tuple[float, float]:
         column_index, row_index = index
         assert isinstance(column_index, int) and isinstance(row_index, int)
-        x = self.column_grid[column_index]
-        y = self.row_grid[row_index]
+        x = self.columns[column_index]
+        y = self.rows[row_index]
         assert isinstance(x, float) and isinstance(y, float)
         return x, y
 
     def __len__(self) -> int:
-        return len(self.column_grid) * len(self.row_grid)
+        return len(self.columns) * len(self.rows)
 
     def __iter__(self) -> Iterator[tuple[float, float]]:
-        for row in self.row_grid:
-            for col in self.column_grid:
+        for row in self.rows:
+            for col in self.columns:
                 yield (col, row)
 
     def draw_frame(self) -> None:
-        self.column_grid.draw_frame()
-        self.row_grid.draw_frame()
+        self.columns.draw_frame()
+        self.rows.draw_frame()
 
     def draw_indexes(self) -> None:
-        for index_col, col in enumerate(self.column_grid):
-            for index_row, row in enumerate(self.row_grid):
+        for index_col, col in enumerate(self.columns):
+            for index_row, row in enumerate(self.rows):
                 db.text(f"({index_col}, {index_row})", (col + 2, row + 2))
 
 
@@ -329,7 +337,7 @@ class BaselineGrid(AbstractArea):
     def bottom(self) -> float:
         """the absolute y value of the bottom of the grid"""
         value = self[-1]
-        assert isinstance(value, float)
+        assert isinstance(value, float | int)
         return value
 
     @property
@@ -361,19 +369,16 @@ class BaselineGrid(AbstractArea):
         for i, line in sorted(enumerate(self)):
             if y_coordinate >= line:
                 return i
-        return None
 
     def closest_line_below_coordinate(self, y_coordinate: float) -> float | None:
         for i, line in sorted(enumerate(self)):
             if y_coordinate >= line:
                 return line
-        return None
 
     def closest_line_above_coordinate(self, y_coordinate: float) -> float | None:
         for i, line in sorted(enumerate(self)):
             if y_coordinate > line:
                 return line + self.line_height
-        return None
 
     @overload
     def __getitem__(self, key: int) -> float: ...
@@ -401,7 +406,7 @@ class BaselineGrid(AbstractArea):
     def __iter__(self) -> Iterator[float]:
         for i in range(self.subdivisions):
             value = self.__getitem__(i)
-            assert isinstance(value, float)
+            assert isinstance(value, float | int)
             yield value
 
     def __mul__(self, factor: float) -> float:

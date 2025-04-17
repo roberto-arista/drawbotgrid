@@ -40,7 +40,7 @@ def image_at_size(path, box: Box, preserve_proportions=True):
 imageAtSize = image_at_size
 
 
-def image_box(path, box: Box, fitting="fit", scale=1, anchor=("left", "top"), draw_box_frame=False, **kwargs):
+def image_box(path, box: Box, fitting="fit", scale: float = 1, anchor=("left", "top"), draw_box_frame=False, **kwargs):
     assert fitting in ("fit", "fill", "crop")
 
     im_path = Path(path)
