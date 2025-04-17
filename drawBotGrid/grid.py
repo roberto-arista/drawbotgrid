@@ -9,7 +9,7 @@ from .aliases import Box, Margins
 
 class AbstractArea:
     """
-    this is mostly a possize, margin manager
+    This is mostly a PosSize, margin manager
 
     """
 
@@ -187,6 +187,51 @@ class ColumnGrid(AbstractGutterGrid):
     """
     Will return coordinates according to a column based grid.
 
+    Columns are refered to by index, accessing a column index will return its absolute x coordinate in the page.
+
+    ```
+    my_columns = Columns((50, 50, 900, 900), 8, 10)
+    print(my_columns[3])
+    > 505.0
+    ```
+
+    Negative indexes refer the right part of a column, starting from the right of the page.
+
+    ```
+    my_columns = Columns((50, 50, 900, 900), 8, 10)
+    print(my_columns[-2])
+    > 798.33
+    ```
+
+    The grid can return the total width of a span of consecutive columns, including the related inbween gutters
+
+    ```
+    my_columns = Columns((50, 50, 900, 900), 8, 10)
+    print(my_columns.span(4))
+    > 596.66
+    ```
+
+    The whole point is to use this as coordinate helpers to draw shapes of course
+
+    ```
+    my_columns = Columns((50, 50, 900, 900), 8, 10)
+    fill(0, 1, 0, .5)
+    rect(my_columns[1], my_columns.bottom, my_columns.span(3), my_columns.height)
+    fill(1, 0, 0, .5)
+    rect(my_columns[0], my_columns.top, my_columns.span(3), -200)
+    rect(my_columns[2], my_columns.top-200, my_columns.span(1), -200)
+    rect(my_columns[5], my_columns.top-400, my_columns.span(2), -200)
+    ```
+
+    The columns grid can also draw itself, if necessary
+    ```
+    my_columns = Columns((50, 50, 900, 900), 8, 10)
+    fill(None)
+    stroke(1, 0, 1)
+    strokeWidth(1)
+    my_columns.draw()
+    ```
+
     """
 
     @property
@@ -215,7 +260,10 @@ class ColumnGrid(AbstractGutterGrid):
 
 
 class RowGrid(AbstractGutterGrid):
-    """Row-based grid implementation"""
+    """
+    Row-based grid implementation
+
+    """
 
     @property
     def rows(self) -> int:
@@ -243,7 +291,10 @@ class RowGrid(AbstractGutterGrid):
 
 
 class Grid(AbstractGutterGrid):
-    """Combined column and row grid"""
+    """
+    Combined column and row grid
+
+    """
 
     def __init__(
         self,
@@ -318,7 +369,10 @@ class Grid(AbstractGutterGrid):
 
 
 class BaselineGrid(AbstractArea):
-    """Baseline grid implementation"""
+    """
+    Baseline grid implementation
+
+    """
 
     def __init__(self, possize: Box, line_height: float) -> None:
         self.input_possize = possize
