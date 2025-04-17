@@ -49,8 +49,8 @@ def image_box(
     anchor: ImageAnchor = ("left", "top"),
     draw_box_frame: bool = False,
     **kwargs,
-):
-    assert fitting in ("fit", "fill", "crop")
+) -> Box:
+    assert fitting in {"fit", "fill", "crop"}, f"`fitting` value not admitted: {fitting}"
 
     im_path = Path(path)
     with tempfile.NamedTemporaryFile(suffix=im_path.suffix, delete=False) as im_cropped:
@@ -68,7 +68,11 @@ def image_box(
             scale_ratio = scale
 
         crop_width, crop_height = _crop_image_with_anchor(
-            path, im_cropped.name, anchor, w / scale_ratio, h / scale_ratio
+            path,
+            im_cropped.name,
+            anchor,
+            w / scale_ratio,
+            h / scale_ratio,
         )
 
         im_width, im_height = db.imageSize(im_cropped.name)
@@ -82,14 +86,17 @@ def image_box(
             offset_x = x + w - im_width_scaled
         elif anchor_x == "center":
             offset_x = x + (w - im_width_scaled) / 2
+        else:  # pragma: no cover   - this can't really fail since they are covered into _crop_image_with_anchor
+            raise ValueError(f"`anchor_x` value not admitted: {anchor_x}")
 
-        assert anchor_y in ("center", "bottom", "top")
         if anchor_y == "bottom":
             offset_y = y
         elif anchor_y == "top":
             offset_y = y + h - im_height_scaled
         elif anchor_y == "center":
             offset_y = y + (h - im_height_scaled) / 2
+        else:  # pragma: no cover   - this can't really fail since they are covered into _crop_image_with_anchor
+            raise ValueError(f"`anchor_y` value not admitted: {anchor_y}")
 
         with db.savedState():
             db.translate(offset_x, offset_y)
@@ -107,7 +114,13 @@ def image_box(
         return offset_x, offset_y, crop_width * scale_ratio, crop_height * scale_ratio
 
 
-def _crop_image_with_anchor(input_path: SomePath, output_path: SomePath, anchor, crop_width: float, crop_height: float):
+def _crop_image_with_anchor(
+    input_path: SomePath,
+    output_path: SomePath,
+    anchor,
+    crop_width: float,
+    crop_height: float,
+) -> tuple[float, float]:
     anchor_x, anchor_y = anchor
     im_width, im_height = db.imageSize(input_path)
 
@@ -120,6 +133,8 @@ def _crop_image_with_anchor(input_path: SomePath, output_path: SomePath, anchor,
         crop_x = im_width - crop_width
     elif anchor_x == "center":
         crop_x = (im_width - crop_width) / 2
+    else:
+        raise ValueError(f"`anchor_x` value not admitted: {anchor_x}")
 
     if anchor_y == "bottom":
         crop_y = 0
@@ -127,6 +142,8 @@ def _crop_image_with_anchor(input_path: SomePath, output_path: SomePath, anchor,
         crop_y = im_height - crop_height
     elif anchor_y == "center":
         crop_y = (im_height - crop_height) / 2
+    else:
+        raise ValueError(f"`anchor_y` value not admitted: {anchor_y}")
 
     ## moving through PIL here
     ## as drawBot imageObject.crop
